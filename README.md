@@ -7,7 +7,9 @@ Redis support for the [refreshing-config](https://github.com/Microsoft/refreshin
 
 # Usage
 1. Install refreshing-config, refreshing-config-redis, and redis:
-  ```npm install --save refreshing-config refreshing-config-redis redis```
+  ```bash
+    npm install --save refreshing-config refreshing-config-redis redis
+  ```
 
 2. Use the library:
   ```javascript
