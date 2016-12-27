@@ -1,5 +1,6 @@
 const Q = require('q');
 const uuid = require('uuid');
+const isJSON = require('is-json');
 
 // Refresh when a change is detected
 class RedisPubSubRefreshPolicyAndChangePublisher {
@@ -60,6 +61,12 @@ class RedisConfigStore {
       if (error) {
         return deferred.reject(error);
       }
+      const properties = Object.getOwnPropertyNames(reply);
+      properties.forEach(property => {
+        if (isJSON(reply[property])) {
+          reply[property] = JSON.parse(reply[property]);
+        }
+      });
       return deferred.resolve(reply);
     });
     return deferred.promise;
@@ -78,7 +85,11 @@ class RedisConfigStore {
 
   set(name, value) {
     const deferred = Q.defer();
-    this.redisClient.hset(this.key, name, value, error => {
+    let valueToStore = value;
+    if (typeof value === 'object') {
+      valueToStore = JSON.stringify(value);
+    }
+    this.redisClient.hset(this.key, name, valueToStore, error => {
       if (error) {
         return deferred.reject(error);
       }
