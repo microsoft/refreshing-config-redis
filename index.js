@@ -1,6 +1,5 @@
 const Q = require('q');
 const uuid = require('uuid');
-const isJSON = require('is-json');
 
 // Refresh when a change is detected
 class RedisPubSubRefreshPolicyAndChangePublisher {
