@@ -61,11 +61,11 @@ class RedisConfigStore {
       if (error) {
         return deferred.reject(error);
       }
-      const properties = Object.getOwnPropertyNames(reply);
-      properties.forEach(property => {
-        if (isJSON(reply[property])) {
-          reply[property] = JSON.parse(reply[property]);
-        }
+      if (!reply) {
+        return deferred.resolve({});
+      }
+      Object.getOwnPropertyNames(reply).forEach(property => {
+        reply[property] = JSON.parse(reply[property]);
       });
       return deferred.resolve(reply);
     });
@@ -85,10 +85,7 @@ class RedisConfigStore {
 
   set(name, value) {
     const deferred = Q.defer();
-    let valueToStore = value;
-    if (typeof value === 'object') {
-      valueToStore = JSON.stringify(value);
-    }
+    const valueToStore = JSON.stringify(value);
     this.redisClient.hset(this.key, name, valueToStore, error => {
       if (error) {
         return deferred.reject(error);
