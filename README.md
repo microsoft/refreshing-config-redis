@@ -5,6 +5,9 @@
 # refreshing-config-redis
 Redis support for the [refreshing-config](https://github.com/Microsoft/refreshing-config) configuration library.
 
+Values are stored in Redis hashmaps and change notification is done via a Redis pub/sub channel.  Great for maintaining
+a single configuration across multiple machines.
+
 # Usage
 1. Install refreshing-config, refreshing-config-redis, and redis:
   ```bash
