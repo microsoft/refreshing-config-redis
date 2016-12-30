@@ -1,7 +1,7 @@
 {
   "name": "refreshing-config-redis",
   "version": "0.1.0",
-  "description": "",
+  "description": "Redis support for the [refreshing-config](https://github.com/Microsoft/refreshing-config) configuration library.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -9,7 +9,14 @@
     "lint": "eslint . --ignore-path .gitignore",
     "prepublish": "npm test && npm run lint"
   },
-  "keywords": [],
+  "keywords": [
+    "config",
+    "dynamic",
+    "refresh",
+    "publish",
+    "subscribe",
+    "redis"
+  ],
   "author": "William Bartholomew <willbar@microsoft.com>",
   "license": "MIT",
   "dependencies": {
