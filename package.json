@@ -4,10 +4,8 @@
   "description": "Redis support for the [refreshing-config](https://github.com/Microsoft/refreshing-config) configuration library.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "coverage": "istanbul cover _mocha && opener coverage/lcov-report/index.html",
     "lint": "eslint . --ignore-path .gitignore",
-    "prepublish": "npm test && npm run lint"
+    "prepublish": "npm run lint"
   },
   "keywords": [
     "config",
