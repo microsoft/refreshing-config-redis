@@ -26,7 +26,7 @@ a single configuration across multiple machines.
     const configurationName = 'my-config-key';
     const channelName = `${configurationName}-channel`;
     const configStore = new RefreshingConfigRedis.RedisConfigStore(redisClient, configurationName);
-    result[subsystemName] = new RefreshingConfig.RefreshingConfig(configStore)
+    const config = new RefreshingConfig.RefreshingConfig(configStore)
       .withExtension(new RefreshingConfigRedis.RedisPubSubRefreshPolicyAndChangePublisher(redisClient, channelName));
 
     // Use the config
