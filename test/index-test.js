@@ -116,6 +116,15 @@ describe('RedisPubSubRefreshPolicyAndChangePublisher', () => {
     publisher.refreshSubscriber(publisher.publisherId);
     refreshSpy.called.should.not.be.true;
   });
+  it('should refresh when calling refreshSubscriber', () => {
+    const channelName = `${configurationName}-channel`;
+    const publisher = new RedisPubSubRefreshPolicyAndChangePublisher(redisClient, channelName);
+    const configStore = new RedisConfigStore(redisClient, configurationName);
+    const config = new RefreshingConfig(configStore).withExtension(publisher);
+    const refreshSpy = sinon.spy(config, 'refresh');
+    publisher.refreshSubscriber();
+    refreshSpy.calledOnce.should.be.true;
+  });
   it('should set subscriber', () => {
     const channelName = 'my-channel';
     const publisher = new RedisPubSubRefreshPolicyAndChangePublisher(redisClient, channelName);
